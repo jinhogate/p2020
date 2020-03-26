@@ -7,8 +7,13 @@ import gl51.pictureservice.Isave
 import gl51.pictureservice.Iupdate
 
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class IuploadImpl implements gl51.pictureservice.Iupload {
+
+    // Cette Classe permet de charger une photo et de faire des traitements sur la photo chargée
+
     @Inject Iresize
     Iresize resizer
 
