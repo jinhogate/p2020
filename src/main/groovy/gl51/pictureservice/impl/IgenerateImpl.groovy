@@ -4,7 +4,9 @@ import gl51.picture.Picture
 import gl51.pictureservice.Iresize
 
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class IgenerateImpl implements gl51.pictureservice.Igenerate {
     static  int i = 1;
     @Inject Iresize
