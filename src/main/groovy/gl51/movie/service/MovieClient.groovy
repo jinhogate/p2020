@@ -1,6 +1,6 @@
-package movie.service
+package gl51.movie.service
 
-import movie.data.Movie
+import gl51.movie.data.Movie
 
 /**
  * get movie details from internet
