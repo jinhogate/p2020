@@ -11,22 +11,25 @@ import javax.inject.Inject
 class MovieClientImplTest extends Specification {
     @Inject
     MovieRegistryImpl registry
+    @Inject
+    MovieClient clientMock = Mock()
 
-    void "injection shoud work"(){
+    void "injection should work"(){
         expect:
-        registry!=null
+        registry != null
+        clientMock != null
     }
 
-    void " favorites should be empty"() {
-        expect:
-        registry.listFavorites() == []
-    }
-
-    void "adding a favorite should fill in the database"(){
+    void "get a movie by its imdbID should work"(){
         when:
-        registry.addMovieToFavorites("test")
+        // Appel du client mock
+        clientMock.getMovieDetail("hello")
         then:
+        // Ajout aux favoris
+        Movie movie = new Movie(imdbID: "hello")
+        registry.addMovieToFavorites(movie.imdbID)
         registry.listFavorites().size() == 1
+
     }
 
 }
