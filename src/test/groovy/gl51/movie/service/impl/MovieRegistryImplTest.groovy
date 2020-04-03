@@ -1,5 +1,6 @@
 package gl51.movie.service.impl
 
+import gl51.movie.data.Movie
 import io.micronaut.test.annotation.MicronautTest
 import spock.lang.Specification
 
@@ -26,5 +27,15 @@ class MovieRegistryImplTest extends Specification {
             registry.addMovieToFavorites("aaaaa")
         then:
             registry.listFavorites().size() == 1
+    }
+
+    void "Getting a movie by it's imdb ID should work"() {
+        when:
+        movieClientMock.getMovieDetail("jam")
+
+        then:
+        Movie movie = new Movie(imdbId: "jam")
+        registry.addMovieToFavorites(movie.imdbId)
+        registry.listFavorites().size() == 1
     }
 }
