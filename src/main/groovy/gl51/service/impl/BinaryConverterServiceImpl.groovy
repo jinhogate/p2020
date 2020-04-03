@@ -1,17 +1,19 @@
 package gl51.service.impl
 
 import gl51.data.Ip
-import gl51.service.IpService
+import gl51.service.IPService
+import gl51.service.IpConverterService
 
 import javax.inject.Inject
 
-class BinaryConverterServiceImpl implements gl51.service.IpConverterService {
+class BinaryConverterServiceImpl implements IpConverterService {
 
     @Inject
-    IpService service
+    IPService service
+
     @Override
     String getAndConvertIp() {
         Ip ip = service.fetchIp()
-
+        ///
     }
 }
