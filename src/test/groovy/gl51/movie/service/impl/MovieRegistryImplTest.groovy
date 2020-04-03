@@ -9,6 +9,7 @@ import javax.inject.Inject
 @MicronautTest
 class MovieRegistryImplTest extends Specification {
 
+    //injection
     @Inject
     MovieRegistryImpl registry
 
