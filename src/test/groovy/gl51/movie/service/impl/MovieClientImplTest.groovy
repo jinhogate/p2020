@@ -22,11 +22,11 @@ class MovieClientImplTest extends Specification {
 
     void "get a movie by its imdbID should work"(){
         when:
-        // appel du client
-        clientMock.getMovieDetail("hello")
+        // appel du clients
+        clientMock.getMovieDetail ("test")
         then:
         // ajouter un favoris
-        Movie movie = new Movie(imdbID: "hello")
+        Movie movie = new Movie (imdbID: "hello")
         registry.addMovieToFavorites(movie.imdbID)
         registry.listFavorites().size() == 1
 
