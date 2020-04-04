@@ -17,6 +17,7 @@ class FilmRegistreImpl implements FilmRegistre {
 
     @Override
     List<Film> listFavoris() {
+        //pas besoin de mettre un return
         internalRegistre
     }
 }
