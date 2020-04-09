@@ -1,31 +1,45 @@
 package gl51
 
-import io.micronaut.http.client.annotation.Client
-import io.micronaut.runtime.server.EmbeddedServer
+import gl51.movie.data.Movie
+import gl51.movie.service.MovieClient
+import gl51.movie.service.impl.MovieClientImpl
+import gl51.movie.service.impl.MovieRegistryImpl
 import io.micronaut.test.annotation.MicronautTest
-import io.micronaut.http.client.RxHttpClient
-import io.micronaut.http.HttpResponse
-import io.micronaut.http.HttpStatus
-import spock.lang.AutoCleanup
+import io.micronaut.test.annotation.MockBean
 import spock.lang.Specification
-import spock.lang.Shared
+
 
 import javax.inject.Inject
 
 @MicronautTest
 class MovieControllerSpec extends Specification {
 
-    @Shared @Inject
-    EmbeddedServer embeddedServer
+    @Inject
+    MovieRegistryImpl registry
 
-    @Shared @AutoCleanup @Inject @Client("/")
-    RxHttpClient client
-
-    void "test index"() {
-        given:
-        HttpResponse response = client.toBlocking().exchange("/movie")
-
+    void "injection should work"() {
         expect:
-        response.status == HttpStatus.OK
+        registry != null
+    }
+
+    void "favorites should be empty"() {
+        expect:
+        registry.listFavorites() == []
+    }
+
+    void "adding a favorite should fill in the database"() {
+        when:
+        registry.addMovieToFavorites("aaaaa")
+        then:
+        registry.listFavorites().size() == 1
+        registry.listFavorites().find { it.title == 'my movie'}
+    }
+
+
+    @MockBean(MovieClientImpl)
+    MovieClient movieClient() {
+        def mock = Mock(MovieClient)
+        mock.getMovieDetail("aaaaa") >> new Movie(imdbID: "aaaaa", title: 'my movie')
+        mock
     }
 }
