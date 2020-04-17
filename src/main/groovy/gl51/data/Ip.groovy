@@ -1,5 +1,4 @@
 package gl51.data
-
 class Ip {
     int range1
     int range2

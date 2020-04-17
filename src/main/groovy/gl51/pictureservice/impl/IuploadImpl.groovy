@@ -8,30 +8,28 @@ import gl51.pictureservice.Iupdate
 
 import javax.inject.Inject
 
+
 class IuploadImpl implements gl51.pictureservice.Iupload {
-    @Inject Iresize
-    Iresize resizer
-
-    @Inject Igenerate
-    Igenerate generizer
-
-    @Inject Isave
-    Isave saver
-
-    @Inject Iupdate
-    Iupdate updater
+    @Inject
+            Iresize resizer
+    @Inject
+            Igenerate generater
+    @Inject
+            Isave saver
+    @Inject
+            Iupdate updater
 
     @Override
     void upload(Picture picture) {
         int size = 1024
         Picture thumbnail
         /*resize*/
-        picture = resizer (picture, size,size)
+        picture = resizer.resize (picture, size,size)
         /*generate*/
-        thumbnail = generizer()
+        thumbnail = generater.generate()
         /*save*/
-        saver(picture,thumbnail)
+        saver.save(picture,thumbnail)
         /*update db*/
-        updater(picture)
+        updater.update(picture)
     }
 }
