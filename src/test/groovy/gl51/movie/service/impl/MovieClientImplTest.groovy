@@ -14,13 +14,13 @@ class MovieClientImplTest extends Specification {
     @Inject
     MovieClient clientMock = Mock()
 
-    void "injection should work"(){
+    void "injectionShouldWork"(){
         expect:
         registry != null
         clientMock != null
     }
 
-    void "get a movie by its imdbID should work"(){
+    void "getAmovieByItsImdbIDShouldWork"(){
         when:
         // appel du clients
         clientMock.getMovieDetail ("test")
